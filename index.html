@@ -550,6 +550,10 @@ footer{border-top:1px solid var(--line);}
 .srv-item:nth-child(2)::after{background:linear-gradient(90deg,#10B981,#06B6D4);}
 .srv-item:nth-child(3)::after{background:linear-gradient(90deg,#F59E0B,#EF4444);}
 .srv-item:nth-child(4)::after{background:linear-gradient(90deg,#8B5CF6,#EC4899);}
+.srv-item:nth-child(5)::after{background:linear-gradient(90deg,#EC4899,#F97316);}
+.srv-item:nth-child(5) .srv-num{color:#EC4899;}
+.srv-item:nth-child(5):hover{box-shadow:0 24px 56px rgba(0,0,0,.11);}
+.srv-span{grid-column:1/-1;}
 .srv-item:hover{
   transform:translateY(-7px);
   border-color:rgba(var(--accent-rgb),.28);
@@ -612,6 +616,88 @@ footer{border-top:1px solid var(--line);}
 .parrow{background:var(--surface);transition:background .22s,color .22s,transform .22s,border-radius .22s;}
 .pitem:hover .parrow{background:var(--accent);color:#fff;transform:rotate(45deg);border-radius:10px;}
 
+/* ═══════════════════════════════════════
+   FEATURE PACK v3
+   · Tech filter bar
+   · Hover preview card
+   · Contact form
+═══════════════════════════════════════ */
+
+/* ── Tech filter bar ── */
+.filter-bar{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.75rem;}
+.ftag{
+  background:none;border:1.5px solid var(--line-strong);color:var(--text-muted);
+  font-family:'Plus Jakarta Sans',sans-serif;font-size:1rem;font-weight:600;
+  letter-spacing:.04em;padding:.32rem .95rem;border-radius:50px;cursor:none;
+  transition:background .18s,border-color .18s,color .18s;
+}
+@media(pointer:coarse){.ftag{cursor:auto;touch-action:manipulation;}}
+.ftag:hover{background:var(--surface);color:var(--text);}
+.ftag.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+.pitem.pf-hidden{display:none;}
+
+/* ── Project preview card ── */
+.ppreview{
+  position:fixed;width:280px;border-radius:14px;overflow:hidden;
+  background:var(--bg-raised);border:1.5px solid var(--line-strong);
+  box-shadow:0 20px 50px rgba(0,0,0,.22);
+  pointer-events:none;z-index:500;
+  opacity:0;transform:scale(.94) translateY(8px);
+  transition:opacity .16s ease,transform .16s ease;
+  will-change:transform,opacity;
+}
+.ppreview.show{opacity:1;transform:scale(1) translateY(0);}
+.ppimg-wrap{width:100%;aspect-ratio:16/10;position:relative;background:var(--surface);overflow:hidden;}
+.ppimg-wrap img{width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity .3s;}
+.ppimg-wrap img.loaded{opacity:1;}
+.pp-shimmer{
+  position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.07) 50%,transparent 100%);
+  background-size:200% 100%;animation:shimmer 1.4s infinite;
+}
+.ppimg-wrap img.loaded~.pp-shimmer{display:none;}
+@keyframes shimmer{0%{background-position:-200% 0;}100%{background-position:200% 0;}}
+.pp-label{
+  padding:.65rem .9rem;
+  font-size:.9rem;font-weight:600;color:var(--text-muted);
+  border-top:1px solid var(--line);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+@media(pointer:coarse){.ppreview{display:none;}}
+
+/* ── Contact form ── */
+.c-form{width:100%;max-width:520px;margin:0 auto;display:flex;flex-direction:column;gap:.8rem;text-align:left;}
+.cf-row{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;}
+.c-form input,.c-form textarea{
+  width:100%;background:var(--bg-raised);border:1.5px solid var(--line-strong);
+  border-radius:12px;padding:.85rem 1.1rem;
+  font-family:'Plus Jakarta Sans',sans-serif;font-size:1rem;color:var(--text);
+  outline:none;transition:border-color .18s,box-shadow .18s;
+  -webkit-appearance:none;appearance:none;
+}
+.c-form input::placeholder,.c-form textarea::placeholder{color:var(--text-faint);}
+.c-form input:focus,.c-form textarea:focus{
+  border-color:rgba(var(--accent-rgb),.5);
+  box-shadow:0 0 0 3px rgba(var(--accent-rgb),.1);
+}
+.c-form textarea{resize:vertical;min-height:118px;line-height:1.6;}
+.cf-status{
+  display:none;align-items:center;gap:.55rem;
+  font-size:1rem;font-weight:600;
+  padding:.8rem 1.1rem;border-radius:10px;margin-top:.2rem;
+}
+.cf-status.ok{display:flex;background:rgba(16,185,129,.1);color:#10B981;border:1.5px solid rgba(16,185,129,.25);}
+.cf-status.err{display:flex;background:rgba(239,68,68,.08);color:#EF4444;border:1.5px solid rgba(239,68,68,.2);}
+#ctaBtn[disabled]{opacity:.65;pointer-events:none;}
+.cf-spin{
+  width:14px;height:14px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;
+  border-radius:50%;animation:cfSpin .7s linear infinite;flex-shrink:0;
+}
+@keyframes cfSpin{to{transform:rotate(360deg);}}
+.c-or{font-size:1rem;color:var(--text-faint);margin-top:1.1rem;}
+.c-or a{color:var(--text-muted);text-decoration:underline;text-underline-offset:3px;transition:color .2s;}
+.c-or a:hover{color:var(--text);}
+@media(max-width:520px){.cf-row{grid-template-columns:1fr;}}
+
 </style>
 
 <!-- Intro wipe -->
@@ -658,6 +744,7 @@ footer{border-top:1px solid var(--line);}
   </ul>
   <div class="m-menu-foot">
     <a href="mailto:bethetrends@gmail.com" class="m-menu-email">bethetrends@gmail.com</a>
+    <a href="https://instagram.com/bethetrendsng" target="_blank" rel="noopener noreferrer" class="m-menu-email">@bethetrendsng</a>
     <span class="m-menu-avail">
       <span style="width:5px;height:5px;border-radius:50%;background:var(--accent);animation:blink 2.5s ease-in-out infinite;" aria-hidden="true"></span>
       Available for projects
@@ -721,7 +808,7 @@ footer{border-top:1px solid var(--line);}
 <section id="services" class="services-section" aria-labelledby="svh">
   <div class="sec-hdr reveal">
     <h2 id="svh" class="sec-title">What I build</h2>
-    <span class="sec-ct" aria-hidden="true">04 services</span>
+    <span class="sec-ct" aria-hidden="true">05 services</span>
   </div>
   <div class="srv-grid">
     <div class="srv-item reveal">
@@ -744,6 +831,11 @@ footer{border-top:1px solid var(--line);}
       <h3 class="srv-title">Startup MVPs</h3>
       <p class="srv-desc">Got an idea and need a working product fast? I build lean, launchable MVPs — functional enough to validate with real users, built well enough to scale when you grow.</p>
     </div>
+    <div class="srv-item srv-span reveal" style="grid-column:1/-1;">
+      <p class="srv-num">05</p>
+      <h3 class="srv-title">Paid Advertising &amp; Sponsored Campaigns</h3>
+      <p class="srv-desc">Professional ad management across Meta (Facebook &amp; Instagram), Google Ads, YouTube, Snapchat, and X (Twitter). I handle strategy, creatives, targeting, and optimisation — so every naira or dollar you spend is working as hard as possible to grow your business.</p>
+    </div>
   </div>
 </section>
 
@@ -751,11 +843,21 @@ footer{border-top:1px solid var(--line);}
 <section id="projects" class="projects-section" aria-labelledby="ph">
   <div class="sec-hdr reveal">
     <h2 id="ph" class="sec-title">Projects</h2>
-    <span class="sec-ct" aria-hidden="true">07 projects</span>
+    <span class="sec-ct" id="projCount" aria-hidden="true">07 projects</span>
   </div>
+
+  <!-- Tech filter pills -->
+  <div class="filter-bar" id="filterBar" role="group" aria-label="Filter by technology">
+    <button class="ftag active" data-filter="all">All</button>
+    <button class="ftag" data-filter="next.js">Next.js</button>
+    <button class="ftag" data-filter="typescript">TypeScript</button>
+    <button class="ftag" data-filter="javascript">JavaScript</button>
+    <button class="ftag" data-filter="postgresql">PostgreSQL</button>
+  </div>
+
   <ul class="plist" id="plist">
 
-    <li class="pitem">
+    <li class="pitem" data-tech="next.js typescript postgresql prisma" data-preview="https://image.thum.io/get/width/640/https://www.relineverify.com">
       <div class="prow">
         <span class="pnum" aria-hidden="true">01</span>
         <div class="pinfo">
@@ -773,7 +875,7 @@ footer{border-top:1px solid var(--line);}
       </div>
     </li>
 
-    <li class="pitem">
+    <li class="pitem" data-tech="next.js postgresql aws nextauth" data-preview="https://image.thum.io/get/width/640/https://lifelink-xi-inky.vercel.app">
       <div class="prow">
         <span class="pnum" aria-hidden="true">02</span>
         <div class="pinfo">
@@ -791,7 +893,7 @@ footer{border-top:1px solid var(--line);}
       </div>
     </li>
 
-    <li class="pitem">
+    <li class="pitem" data-tech="html javascript vercel" data-preview="https://image.thum.io/get/width/640/https://siritzdelaroche.org">
       <div class="prow">
         <span class="pnum" aria-hidden="true">03</span>
         <div class="pinfo">
@@ -809,7 +911,7 @@ footer{border-top:1px solid var(--line);}
       </div>
     </li>
 
-    <li class="pitem">
+    <li class="pitem" data-tech="html javascript vercel" data-preview="https://image.thum.io/get/width/640/https://betrends.github.io/kaileen-design-concept/">
       <div class="prow">
         <span class="pnum" aria-hidden="true">04</span>
         <div class="pinfo">
@@ -827,7 +929,7 @@ footer{border-top:1px solid var(--line);}
       </div>
     </li>
 
-    <li class="pitem">
+    <li class="pitem" data-tech="html javascript" data-preview="https://image.thum.io/get/width/640/https://betrends.github.io/weather-app/">
       <div class="prow">
         <span class="pnum" aria-hidden="true">05</span>
         <div class="pinfo">
@@ -845,7 +947,7 @@ footer{border-top:1px solid var(--line);}
       </div>
     </li>
 
-    <li class="pitem">
+    <li class="pitem" data-tech="html javascript canvas" data-preview="https://image.thum.io/get/width/640/https://betrends.github.io/Drum-kit-app/">
       <div class="prow">
         <span class="pnum" aria-hidden="true">06</span>
         <div class="pinfo">
@@ -863,7 +965,7 @@ footer{border-top:1px solid var(--line);}
       </div>
     </li>
 
-    <li class="pitem">
+    <li class="pitem" data-tech="html javascript" data-preview="https://image.thum.io/get/width/640/https://betrends.github.io/candy-crush-game/">
       <div class="prow">
         <span class="pnum" aria-hidden="true">07</span>
         <div class="pinfo">
@@ -916,20 +1018,36 @@ footer{border-top:1px solid var(--line);}
   <div class="c-htrack"><span class="c-head" id="ch">Ready to build</span></div>
   <div class="c-htrack"><span class="c-head l2">your website?</span></div>
   <p class="c-sub">Tell me what you need — a new site, a redesign, or a full web application. I'll get back to you within 24 hours with a clear plan and a straight price.</p>
-  <div class="c-btns">
-    <a href="mailto:bethetrends@gmail.com" class="c-cta" id="ctaBtn">
-      Send an email
+
+  <!-- Contact form — powered by Formspree -->
+  <!-- Sign up free at formspree.io, create a form, and replace YOUR_FORM_ID below -->
+  <form class="c-form" id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
+    <div class="cf-row">
+      <input type="text"  name="name"    placeholder="Your name"        required autocomplete="name">
+      <input type="email" name="_replyto" placeholder="Email address"   required autocomplete="email">
+    </div>
+    <input type="text" name="subject" placeholder="What do you need built?">
+    <textarea name="message" rows="4" placeholder="Tell me about your project — what it does, who it's for, and when you need it…" required></textarea>
+    <input type="hidden" name="_subject" value="New project inquiry — Betrends portfolio">
+    <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+    <div class="cf-status" id="cfStatus" role="alert"></div>
+    <button type="submit" class="c-cta" id="ctaBtn">
+      Send message
       <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M2 10L10 2M4 2h6v6"/></svg>
-    </a>
-    <a href="tel:+2347080223440" class="c-tel">
-      <svg viewBox="0 0 16 16" aria-hidden="true">
-        <path d="M3 2h3l1.5 3.5-2 1.5a9 9 0 0 0 3.5 3.5l1.5-2L14 10v3a1 1 0 0 1-1 1A11 11 0 0 1 2 3a1 1 0 0 1 1-1z"/>
-      </svg>
-      +234 708 022 3440
-    </a>
-  </div>
+    </button>
+  </form>
+  <p class="c-or">or call <a href="tel:+2347080223440">+234 708 022 3440</a> &nbsp;·&nbsp; <a href="https://instagram.com/bethetrendsng" target="_blank" rel="noopener noreferrer">Instagram</a></p>
 
 </section>
+
+<!-- Project hover preview card (desktop only) -->
+<div class="ppreview" id="ppreview" aria-hidden="true">
+  <div class="ppimg-wrap">
+    <img id="ppimg" src="" alt="" loading="lazy">
+    <div class="pp-shimmer"></div>
+  </div>
+  <p class="pp-label" id="ppLabel"></p>
+</div>
 
 <!-- FOOTER -->
 <footer>
@@ -1220,4 +1338,123 @@ if(cta) {
   });
   cta.addEventListener('mouseleave', ()=>{ cta.style.transform=''; });
 }
+
+/* ══════════════════════════════════════
+   TECH FILTER
+══════════════════════════════════════ */
+(function() {
+  const ftags   = document.querySelectorAll('.ftag');
+  const pitems  = document.querySelectorAll('.pitem');
+  const counter = document.getElementById('projCount');
+
+  ftags.forEach(btn => {
+    btn.addEventListener('click', () => {
+      ftags.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      let visible = 0;
+      pitems.forEach(item => {
+        const tech = (item.dataset.tech || '').toLowerCase();
+        const show = f === 'all' || tech.includes(f);
+        item.classList.toggle('pf-hidden', !show);
+        if (show) visible++;
+      });
+      if (counter) counter.textContent = `${String(visible).padStart(2,'0')} project${visible !== 1 ? 's' : ''}`;
+    });
+  });
+})();
+
+/* ══════════════════════════════════════
+   PROJECT HOVER PREVIEW
+══════════════════════════════════════ */
+(function() {
+  const preview  = document.getElementById('ppreview');
+  const ppImg    = document.getElementById('ppimg');
+  const ppLabel  = document.getElementById('ppLabel');
+  if (!preview || !ppImg) return;
+
+  let showTimer = null;
+  let mx = 0, my = 0;
+
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+
+  document.querySelectorAll('.pitem[data-preview]').forEach(item => {
+    item.addEventListener('mouseenter', () => {
+      clearTimeout(showTimer);
+      const src  = item.dataset.preview;
+      const name = item.querySelector('.ptitle')?.textContent || '';
+      if (ppImg.getAttribute('src') !== src) {
+        ppImg.classList.remove('loaded');
+        ppImg.src = src;
+        ppImg.onload  = () => ppImg.classList.add('loaded');
+        ppImg.onerror = () => ppImg.classList.add('loaded'); // hide shimmer on error too
+      }
+      if (ppLabel) ppLabel.textContent = name;
+      showTimer = setTimeout(() => {
+        positionPreview();
+        preview.classList.add('show');
+      }, 80);
+    });
+    item.addEventListener('mouseleave', () => {
+      clearTimeout(showTimer);
+      preview.classList.remove('show');
+    });
+    item.addEventListener('mousemove', positionPreview);
+  });
+
+  function positionPreview() {
+    const pw = preview.offsetWidth, ph = preview.offsetHeight;
+    let x = mx + 24, y = my - ph / 2;
+    if (x + pw > window.innerWidth  - 12) x = mx - pw - 24;
+    if (y < 12) y = 12;
+    if (y + ph > window.innerHeight - 12) y = window.innerHeight - ph - 12;
+    preview.style.left = x + 'px';
+    preview.style.top  = y + 'px';
+  }
+})();
+
+/* ══════════════════════════════════════
+   CONTACT FORM  (Formspree)
+══════════════════════════════════════ */
+(function() {
+  const form     = document.getElementById('contactForm');
+  const submit   = document.getElementById('ctaBtn');
+  const status   = document.getElementById('cfStatus');
+  if (!form) return;
+
+  const ARROW_SVG = `<svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M2 10L10 2M4 2h6v6"/></svg>`;
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    if (form.action.includes('YOUR_FORM_ID')) {
+      status.className = 'cf-status err';
+      status.innerHTML = '⚠ &nbsp;Set up Formspree first — see the HTML comment above the form.';
+      return;
+    }
+    submit.disabled = true;
+    submit.innerHTML = '<span class="cf-spin"></span>Sending…';
+    status.className = 'cf-status';
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' }
+      });
+      if (res.ok) {
+        status.className = 'cf-status ok';
+        status.innerHTML = '✓ &nbsp;Sent! I'll reply within 24 hours.';
+        form.reset();
+        setTimeout(() => { status.className = 'cf-status'; }, 7000);
+      } else {
+        throw new Error();
+      }
+    } catch {
+      status.className = 'cf-status err';
+      status.innerHTML = '✕ &nbsp;Couldn\'t send — email me at <a href="mailto:bethetrends@gmail.com">bethetrends@gmail.com</a>';
+    }
+    submit.disabled = false;
+    submit.innerHTML = 'Send message ' + ARROW_SVG;
+  });
+})();
 </script>
