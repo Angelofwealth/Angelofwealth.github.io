@@ -484,6 +484,47 @@ footer{border-top:1px solid var(--line);}
   .srv-item{padding:2rem 1.5rem;}
   .a-head{font-size:clamp(1.8rem,7vw,3.1rem);}
 }
+
+/* ── Mobile font scaling ── */
+@media(max-width:768px){
+  /* Bump all the small label / eyebrow fonts */
+  .nav-links a,
+  .nav-logo                       { font-size:.95rem; }
+  .sl,.sec-ct,.srv-label,
+  .a-label,.sk-label,
+  .c-eye,.c-link                  { font-size:.8rem; }
+  .hero-tag                       { font-size:1.05rem; }
+  .hero-time                      { font-size:.85rem; }
+  .sn-label                       { font-size:.78rem; }
+  .srv-desc                       { font-size:1rem; }
+  .a-body,.c-sub                  { font-size:1.05rem; }
+  .pdesc                          { font-size:.95rem; }
+  .ptitle                         { font-size:1.15rem; }
+  .stag                           { font-size:.75rem; }
+  .sk-chip                        { font-size:.88rem; }
+  .pnum                           { font-size:.72rem; }
+  .pcategory                      { font-size:.7rem; }
+  .footer-inner                   { font-size:.85rem; }
+  .marquee-track                  { font-size:.82rem; }
+}
+
+@media(max-width:480px){
+  .sl,.sec-ct,.srv-label,
+  .a-label,.sk-label,
+  .c-eye,.c-link                  { font-size:.85rem; }
+  .hero-tag                       { font-size:1.1rem; line-height:1.65; }
+  .srv-name                       { font-size:1.2rem; }
+  .srv-desc                       { font-size:1.05rem; }
+  .a-body,.c-sub                  { font-size:1.08rem; }
+  .pdesc                          { font-size:1rem; }
+  .ptitle                         { font-size:1.2rem; }
+  .stag                           { font-size:.78rem; }
+  .sk-chip                        { font-size:.9rem; }
+  .c-head                         { font-size:clamp(2.2rem,12vw,4rem); }
+  .sn                             { font-size:1.6rem; }
+  .sn-label                       { font-size:.82rem; }
+  .footer-inner                   { font-size:.88rem; }
+}
 </style>
 
 <!-- Intro wipe -->
