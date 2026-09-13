@@ -418,6 +418,20 @@ footer{border-top:1px solid var(--line);}
 .footer-inner{max-width:var(--max-w);margin:0 auto;padding:1.75rem var(--px);display:flex;align-items:center;justify-content:space-between;font-size:1rem;color:var(--text-muted);}
 .footer-sig{font-family:'Bricolage Grotesque',sans-serif;font-size:1rem;font-weight:700;letter-spacing:.06em;opacity:.2;}
 
+/* ── Hero scroll hint ── */
+.scroll-hint{
+  display:inline-flex;flex-direction:column;align-items:center;gap:.4rem;
+  background:none;border:none;padding:.5rem;
+  color:var(--text-faint);cursor:none;
+  opacity:0;animation:riseIn .6s ease 2.2s both;
+  transition:color .2s;margin-top:2.5rem;
+}
+.scroll-hint:hover{color:var(--text-muted);}
+.scroll-hint span{font-size:.82rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;}
+.scroll-hint svg{animation:arrowBounce 1.8s ease-in-out infinite;}
+@keyframes arrowBounce{0%,100%{transform:translateY(0);}55%{transform:translateY(7px);}}
+@media(pointer:coarse){.scroll-hint{cursor:auto;}}
+
 /* ── Live time ── */
 .hero-time{
   display:inline-flex;align-items:center;gap:.5rem;
@@ -793,6 +807,14 @@ footer{border-top:1px solid var(--line);}
         </div>
       </div>
     </div>
+
+    <button class="scroll-hint" id="scrollHint" aria-label="Scroll to services">
+      <span>Scroll</span>
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M4 7l6 6 6-6"/>
+      </svg>
+    </button>
+
   </div>
 </header>
 
@@ -1340,6 +1362,16 @@ if(cta) {
 }
 
 /* ══════════════════════════════════════
+   SCROLL HINT (hero down-arrow)
+══════════════════════════════════════ */
+const scrollHint = document.getElementById('scrollHint');
+if (scrollHint) {
+  scrollHint.addEventListener('click', () => {
+    document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
+  });
+}
+
+/* ══════════════════════════════════════
    TECH FILTER
 ══════════════════════════════════════ */
 (function() {
@@ -1443,7 +1475,7 @@ if(cta) {
       });
       if (res.ok) {
         status.className = 'cf-status ok';
-        status.innerHTML = '✓ &nbsp;Sent! I'll reply within 24 hours.';
+        status.innerHTML = '✓ &nbsp;Sent! I\'ll reply within 24 hours.';
         form.reset();
         setTimeout(() => { status.className = 'cf-status'; }, 7000);
       } else {
